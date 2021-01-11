@@ -1,8 +1,11 @@
 # StockScans
 StockScans uses the Alpaca API to find opportunities in the stock market through various trading strategies
 
+![Screenshot](https://ninja.photos/6dsr177ASO-4393334781.png)
+
 # Supported Scan Types
   1. Inside Bars
+  
   Coming soon: Oversold Bounces (RSI)
   
 # Supported Time Frames
@@ -16,5 +19,6 @@ StockScans uses the Alpaca API to find opportunities in the stock market through
   
 # Known Issues
   1. Handling partial bars on Inside Bars mode (such as scanning for weekly inside bars on a Tuesday) is not fully supported and may cause some issues. 
+  
      (However, the scanner will likely still return tight/compressed ranges, except they might not fit the exact definition of an IB)
   

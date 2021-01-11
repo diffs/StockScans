@@ -5,7 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"math"
-	"math/rand"
 	"net/http"
 	"os"
 	"runtime"
@@ -16,8 +15,6 @@ import (
 )
 
 var(
-	threads = flag.Int("threads", 20, "-threads <int>")
-
 	timeFrame string
 	setup int
 )
@@ -28,7 +25,6 @@ func init() {
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-	//rand.Seed(time.Now().UnixNano())
 
 	loadConfig()
 	var err error
@@ -48,10 +44,7 @@ func main() {
 
 		userInput := getUserInput(reader)
 		selection, err := strconv.Atoi(userInput)
-		fmt.Println(userInput)
-		fmt.Println(selection)
 		if err != nil || selection != 1 && selection != 2 {
-
 			fmt.Println("Invalid entry. Please try again " + err.Error())
 			continue
 		}
@@ -92,6 +85,7 @@ func main() {
 		}
 
 		fmt.Println("Selection Confirmed!")
+		fmt.Println()
 		break
 	}
 
@@ -156,10 +150,6 @@ func CondenseBars(bars Bars, factor int, stopper string) Bars {
 		if len(ticker.Bars) == 0 {
 			continue
 		}
-		/*for time.Unix(int64(ticker.Bars[progress].Time), 0).Weekday().String() != "Monday" {
-			fmt.Printf("Incrementing progress to %d\n", progress)
-			progress++
-		}*/
 		for i := 0; i < len(ticker.Bars)/factor; i++ {
 			b := Bar{Low: math.MaxFloat64}
 			for x := 0; x < factor; x++ {
@@ -209,12 +199,3 @@ func readLines(path string) ([]string, error) {
 	return lines, scanner.Err()
 }
 
-var letterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-
-func RandStringRunes(n int) string {
-	b := make([]rune, n)
-	for i := range b {
-		b[i] = letterRunes[rand.Intn(len(letterRunes))]
-	}
-	return string(b)
-}
